@@ -1,4 +1,5 @@
-// Inside burger.js, import orm.js into burger.js (shows how to interface with database-model)
+// Inside burger.js, import orm.js into burger.js  to create functions that 
+// 		"models" how to interface with burgers_db database
 var orm = require("../config/orm.js");
 
 // Also inside burger.js, create the code that will call the ORM functions using 
@@ -10,23 +11,26 @@ var burger = {
       cb(res);
     });
   },
-  // The variables cols and vals are arrays.
+  // The variables cols and vals are arrays.  Passing the burgers string
   create: function(cols, vals, cb) {
     orm.create("burgers", cols, vals, function(res) {
       cb(res);
     });
   },
   update: function(objColVals, condition, cb) {
-    orm.update("s", objColVals, condition, function(res) {
+    orm.update("burgers", objColVals, condition, function(res) {
       cb(res);
     });
   }
+  delete: function(condition, cb) {
+    orm.update("burgers", condition, function(res) {
+      cb(res);
+    });
+  }
+
+
 };
 
-// Export the database functions for the controller (catsController.js).
-module.exports = cat;
+// Export the database functions for the controller (burgers_controller.js).
+module.exports = burger;
 
-
-
-
-// Export at the end of the burger.js file.
