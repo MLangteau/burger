@@ -1,8 +1,19 @@
-// import require
-// create these methods
+var connection = require("../config/connection.js");
 
-// selectAll()
-// insertOne()
-// updateOne()
+// selectAll();
+function selectAll() {
 
-// Export the ORM object in module.exports
+}
+
+// insertOne();
+function insertOne() {
+
+}
+
+// updateOne();
+function updateOne() {
+
+}
+
+// Export the ORM object in module.exports (burger.js)
+module.exports = orm;
