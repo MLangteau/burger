@@ -1,0 +1,46 @@
+body {
+    
+    font-family: 'Roboto', sans-serif;
+    background-attachment: fixed;
+    background-image: url('../img/burger.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+h1{
+	text-align: center;
+}
+
+li {
+  padding: 5px;
+  margin: 5px;
+  background: #faebd7;
+}
+
+
+.create-form {
+  padding: 1em;
+  margin: 1em;
+  background: aqua;
+}
+
+.containment {
+	width: 99%;
+	text-align: center;
+}
+
+.right-side, .left-side {
+	display: block;
+	width: 50%;
+}
+
+.left-side {
+	text-align: center;
+	color: white;
+	background: linear-gradient(#51A7F9, #0365C0)
+}
+
+.right-side {
+	text-align: center;
+	background: linear-gradient(#EF951A, #DE6A10)
+}

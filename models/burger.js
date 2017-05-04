@@ -22,12 +22,13 @@ var burger = {
       cb(res);
     });
   }
+  /*
   delete: function(condition, cb) {
     orm.update("burgers", condition, function(res) {
       cb(res);
     });
   }
-
+*/
 
 };
 
