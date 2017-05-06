@@ -7,6 +7,9 @@ var router = express.Router();
 // Import the model (burger.js) to use its database functions.
 var burger = require("../models/burger.js");
 
+// Import colors for console.logging 
+var colors = require('colors');
+
 // Create all our routes
 router.get("/", function(req, res) {
     res.redirect("/burgers");
@@ -17,17 +20,18 @@ router.get("/burgers", function(req, res) {
     var handlebrsObject = {
       burgers: data
     };
-    console.log(handlebrsObject);
+//    console.log(handlebrsObject);
+    console.log(('controller response  = ' + JSON.stringify(handlebrsObject)).inverse.cyan);
     res.render("index", handlebrsObject);
   });
 });
 
 router.post("/burgers/create", function(req, res) {
-  burger.create([
-    "burger_name", "devoured"
-  ], [
-    req.body.burger_name, req.body.devoured
-  ], function() {
+  console.log("res", res);
+  console.log("req.body", req.body);
+  burger.create(req.body.burger_name, function(result) {
+//    console.log("result", result);
+    console.log(('controller response  = ' + JSON.stringify(result)).inverse.cyan);
     res.redirect("/");
   });
 });
@@ -35,11 +39,11 @@ router.post("/burgers/create", function(req, res) {
 router.put("/:id", function(req, res) {
   var condition = "id = " + req.params.id;
 
-  console.log("condition", condition);
+//  console.log("condition", condition);
 
-  burger.update({
-    devoured: req.body.devoured
-  }, condition, function() {
+  console.log(('controller condition  = ' + JSON.stringify(condition)).inverse.cyan);
+  burger.update({devoured: req.body.devoured}, condition, function() {
+      console.log(('controller devoured  = ' + JSON.stringify(req.body.devoured)).inverse.cyan);
     res.redirect("/");
   });
 });

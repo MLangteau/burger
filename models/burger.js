@@ -8,17 +8,20 @@ var orm = require("../config/orm.js");
 var burger = {
   all: function(cb) {
     orm.all("burgers", function(res) {
+      console.log(('MODEL all response  = ' + JSON.stringify(res)).inverse.red);
       cb(res);
     });
   },
   // The variables cols and vals are arrays.  Passing the burgers string
-  create: function(cols, vals, cb) {
-    orm.create("burgers", cols, vals, function(res) {
+  create: function(name, cb) {
+    orm.create("burgers", ["burger_name", "devoured"], [name, false], function(res) {
+        console.log(('MODEL create response  = ' + JSON.stringify(name)).inverse.red);
       cb(res);
     });
   },
   update: function(objColVals, condition, cb) {
-    orm.update("burgers", objColVals, condition, function(res) {
+    orm.update("burgers", {devoured: true}, condition, function(res) {
+        console.log(('MODEL update response  = ' + JSON.stringify(objColVals)).inverse.red);
       cb(res);
     });
   }

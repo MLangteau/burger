@@ -30,7 +30,8 @@ function objToSql(ob) {
 // Object for all our SQL statement functions.
 var orm = {
   all: function(tableInput, cb) {
-    var queryString = "SELECT * FROM " + tableInput + ";";
+      var queryString = `SELECT * FROM ${tableInput};`;
+  //  var queryString = "SELECT * FROM " + tableInput + ";";
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
@@ -39,12 +40,17 @@ var orm = {
     });
   },
   create: function(table, cols, vals, cb) {
-    var queryString = "INSERT INTO " + table;
+    console.log("COLLLLL", cols, "VALLLLS", vals);
 
-    queryString += " (";
-    queryString += cols.toString();
-    queryString += ") ";
-    queryString += "VALUES (";
+    var queryString = `INSERT INTO ${table} (${cols}) VALUES (`;
+
+    // var queryString = "INSERT INTO " + table;
+
+    // queryString += " (";
+    // queryString += cols.toString();
+    // queryString += ") ";
+    // queryString += "VALUES (";
+
 //    queryString += insertOne(vals.lsength);
     queryString += printQuestionMarks(vals.length);
     queryString += ") ";
@@ -61,15 +67,19 @@ var orm = {
   },
   // An example of objColVals would be {burger_name: beef, devoured: true}
   update: function(table, objColVals, condition, cb) {
+
+
     var queryString = "UPDATE " + table;
 
     queryString += " SET ";
-//    queryString += updateOne(objColVals);
     queryString += objToSql(objColVals);
     queryString += " WHERE ";
     queryString += condition;
 
     console.log(queryString);
+
+    console.log(('ORM objColVals update = ' + JSON.stringify(objColVals)).inverse.blue);
+
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;

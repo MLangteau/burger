@@ -1,14 +1,14 @@
 <h1>Eat-Da-Burger!</h1>
 
-<div class="left-side">
+<div class="left-side col-md-4">
     <ul>
       {{#each burgers}}
         {{#unless this.devoured}}
           <li>
-            {{this.name}}
+            {{this.burger_name}}
 
             <form action="/{{this.id}}?_method=PUT" method="POST">
-              <input type="hidden" name="notDevoured" value="false">
+              <input type="hidden" name="devoured" value="false">
               <button class="devour" type="submit">Devour it!</button>
             </form>
 
@@ -18,13 +18,26 @@
     </ul>
 </div>
 
-<div class="right-side">
+<div class="middle-section col-md-4">
+    <h2>Add a Burger</h2>
+    <form class="create-form" action="/burgers/create" method="POST">
+
+      <div class="form-group ">
+        <label for="bur">Burger Name:</label>
+        <input class="addBurg" type="text" id="bur" name="burger_name">
+      </div>
+
+      <button class="addBurg" type="submit">Add Burger</button>
+    </form>
+</div>
+
+<div class="right-side col-md-4">
 
     <ul>
       {{#each burgers}}
         {{#if this.devoured}}
           <li>
-            {{this.name}}
+            {{this.burger_name}}
 
             <form action="/{{this.id}}?_method=PUT" method="POST">
               <input type="hidden" name="devoured" value="true">
@@ -34,17 +47,4 @@
         {{/if}}
       {{/each}}
     </ul>
-</div>
-
-<div class="bottoms-up">
-    <h2>Add a Burger</h2>
-    <form class="create-form" action="/" method="POST">
-
-      <div class="form-group">
-        <label for="bur">Burger Name:</label>
-        <input class="addBurg" type="text" id="bur" name="name">
-      </div>
-
-      <button class="addBurg" type="submit">Add Burger</button>
-    </form>
 </div>
