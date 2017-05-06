@@ -17,6 +17,7 @@ li {
   color: black;
   background: pink;
   opacity: .7;
+  list-style-type: none;
 }
 
 .create-form {

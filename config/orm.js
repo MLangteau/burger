@@ -55,7 +55,7 @@ var orm = {
     queryString += printQuestionMarks(vals.length);
     queryString += ") ";
 
-    console.log(queryString);
+    console.log("queryString",  + queryString.inverse.blue);
 
     connection.query(queryString, vals, function(err, result) {
       if (err) {
@@ -67,7 +67,6 @@ var orm = {
   },
   // An example of objColVals would be {burger_name: beef, devoured: true}
   update: function(table, objColVals, condition, cb) {
-
 
     var queryString = "UPDATE " + table;
 

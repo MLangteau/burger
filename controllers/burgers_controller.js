@@ -42,6 +42,7 @@ router.put("/:id", function(req, res) {
 //  console.log("condition", condition);
 
   console.log(('controller condition  = ' + JSON.stringify(condition)).inverse.cyan);
+  
   burger.update({devoured: req.body.devoured}, condition, function() {
       console.log(('controller devoured  = ' + JSON.stringify(req.body.devoured)).inverse.cyan);
     res.redirect("/");
