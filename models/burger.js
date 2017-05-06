@@ -6,8 +6,10 @@ var orm = require("../config/orm.js");
 // 		burger specific input for the ORM.
 
 var burger = {
+  table: "burgers",
+
   all: function(cb) {
-    orm.all("burgers", function(res) {
+    orm.all(this.table, function(res) {
       console.log(('MODEL all response  = ' + JSON.stringify(res)).inverse.red);
       cb(res);
     });
@@ -24,17 +26,13 @@ var burger = {
         console.log(('MODEL update response  = ' + JSON.stringify(objColVals)).inverse.red);
       cb(res);
     });
-  }
-  /*
+  },
   delete: function(condition, cb) {
-    orm.update("burgers", condition, function(res) {
+    orm.delete(this.table, condition, function(res) {
       cb(res);
     });
   }
-*/
-
 };
 
 // Export the database functions for the controller (burgers_controller.js).
 module.exports = burger;
-

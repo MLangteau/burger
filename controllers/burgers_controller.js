@@ -44,7 +44,7 @@ router.put("/:id", function(req, res) {
   console.log(('controller condition  = ' + JSON.stringify(condition)).inverse.cyan);
   
   burger.update({devoured: req.body.devoured}, condition, function() {
-      console.log(('controller devoured  = ' + JSON.stringify(req.body.devoured)).inverse.cyan);
+      console.log(('\ncontroller devoured  = ' + JSON.stringify(req.body.devoured)).inverse.cyan);
     res.redirect("/");
   });
 });
@@ -53,7 +53,7 @@ router.delete("/:id", function(req, res) {
   var condition = "id = " + req.params.id;
 
   console.log("condition", condition);
-
+  console.log(('\ncontroller devoured  = ' + JSON.stringify(req.params.id)).inverse.blue);
   burger.delete(condition, function() {
     res.redirect("/");
   });

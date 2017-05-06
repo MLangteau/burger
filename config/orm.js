@@ -85,24 +85,22 @@ var orm = {
       }
       cb(result);
     });
-  }
-/*
+  },
+
   //  ADD this DELETE for future reference
   delete: function(table, condition, cb) {
+
     var queryString = "DELETE FROM " + table;
+    queryString += " WHERE ";
+    queryString += condition;
 
-    queryString = queryString + ' WHERE ';
-    queryString = queryString + condition;
-
-    console.log(queryString);
-    connection.query(queryString, function(err, result) {
+    connection.query(queryString, [condition], function(err, result) {
       if (err) {
         throw err;
       }
       cb(result);
     });
   }
-*/
 };
 
 // Export the ORM object in module.exports (burger.js)

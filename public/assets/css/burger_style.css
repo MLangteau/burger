@@ -1,5 +1,5 @@
 body {
-    
+    text-align: center;
     font-family: 'Roboto', sans-serif;
     background-attachment: fixed;
     background-image: url('../img/burger.png');
@@ -7,7 +7,7 @@ body {
     background-size: 100%;
 }
 
-h1{
+h1,h2{
 	text-align: center;
 }
 
@@ -43,8 +43,9 @@ li {
 
 .left-side {
 	text-align: center;
-	color: green;
+	color: black;
 	background: tan;
+	margin-left: 10%;
 }
 
 .right-side {
