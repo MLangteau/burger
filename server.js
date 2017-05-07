@@ -2,7 +2,7 @@ var express = require("express");
 var methodOverride = require("method-override");
 var bodyParser = require("body-parser");
 
-// needed for heroku
+// Needed for Heroku deployment
 const port = process.env.PORT || 3000;
 //var port = 3000; (only local)
 

@@ -1,6 +1,7 @@
 // Set up MySQL connection for Node
 var mysql = require("mysql");
 
+// Set up database and necessities for connection
 var connection = mysql.createConnection({
   port: 3306,
   host: "localhost",
@@ -9,7 +10,7 @@ var connection = mysql.createConnection({
   database: "burgers_db"
 });
 
-// Make connection.
+// Make connection and display threadId for verification of connection
 connection.connect(function(err) {
   if (err) {
     console.error("error connecting: " + err.stack);

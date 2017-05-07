@@ -1,9 +1,6 @@
 // Import MySQL connection.
 var connection = require("../config/connection.js");
 
-
-// selectAll();
-
 function printQuestionMarks(num) {
   var arr = [];
 
@@ -30,8 +27,10 @@ function objToSql(ob) {
 // Object for all our SQL statement functions.
 var orm = {
   all: function(tableInput, cb) {
+
+    //  var queryString = "SELECT * FROM " + tableInput + ";";
       var queryString = `SELECT * FROM ${tableInput};`;
-  //  var queryString = "SELECT * FROM " + tableInput + ";";
+
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
@@ -40,22 +39,24 @@ var orm = {
     });
   },
   create: function(table, cols, vals, cb) {
-    console.log("COLLLLL", cols, "VALLLLS", vals);
+//    console.log("COLLLLL", cols, "VALLLLS", vals);
+    cols = cols.toString();
 
-    var queryString = `INSERT INTO ${table} (${cols}) VALUES (`;
+    //  Using template literals `${}` to create cleaner lines of code in many cases (**New for ES6)
+    // The NEW WAY: (one line of code);
+    var queryString = `INSERT INTO ${table} (${cols}) VALUES (${printQuestionMarks(vals.length)});`;
 
+    // The OLD WAY: (five lines of code);  (not including cols.toString above, since it changed)
     // var queryString = "INSERT INTO " + table;
-
     // queryString += " (";
     // queryString += cols.toString();
     // queryString += ") ";
     // queryString += "VALUES (";
 
-//    queryString += insertOne(vals.lsength);
-    queryString += printQuestionMarks(vals.length);
-    queryString += ") ";
+    // queryString += printQuestionMarks(vals.length);
+    // queryString += ") ";
 
-    console.log("queryString",  + queryString.inverse.blue);
+    console.log(("queryString in create"  + JSON.stringify(queryString)).inverse.blue);
 
     connection.query(queryString, vals, function(err, result) {
       if (err) {
@@ -68,15 +69,16 @@ var orm = {
   // An example of objColVals would be {burger_name: beef, devoured: true}
   update: function(table, objColVals, condition, cb) {
 
-    var queryString = "UPDATE " + table;
+  //  Using the new ES6 object literal (five line down to 1, again)
+   var queryString = `UPDATE ${table} SET ${objToSql(objColVals)} WHERE ${condition}`;
 
-    queryString += " SET ";
-    queryString += objToSql(objColVals);
-    queryString += " WHERE ";
-    queryString += condition;
+   //  var queryString = "UPDATE " + table;
+   //  queryString += " SET ";
+   //  queryString += objToSql(objColVals);
+   //  queryString += " WHERE ";
+   //  queryString += condition;
 
-    console.log(queryString);
-
+    console.log(("queryString in update: "  + JSON.stringify(queryString)).inverse.blue);
     console.log(('ORM objColVals update = ' + JSON.stringify(objColVals)).inverse.blue);
 
     connection.query(queryString, function(err, result) {
@@ -90,11 +92,15 @@ var orm = {
   //  ADD this DELETE for future reference
   delete: function(table, condition, cb) {
 
-    var queryString = "DELETE FROM " + table;
-    queryString += " WHERE ";
-    queryString += condition;
+    var queryString = `DELETE FROM ${table} WHERE ${condition};`;
 
-    connection.query(queryString, [condition], function(err, result) {
+    // var queryString = "DELETE FROM " + table;
+    // queryString += " WHERE ";
+    // queryString += condition;
+    console.log("delete queryString: " + queryString);
+    console.log("condition: " + condition);
+
+    connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
       }
