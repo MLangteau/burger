@@ -15,45 +15,35 @@ router.get("/", function(req, res) {
     res.redirect("/burgers");
   });
 
+// Router to the burger.js file with the handlebars Object for displaying all
 router.get("/burgers", function(req, res) {
-  burger.all(function(data) {
+  burger.selectAll(function(data) {
     var handlebrsObject = {
       burgers: data
     };
-//    console.log(handlebrsObject);
-    console.log(('controller response  = ' + JSON.stringify(handlebrsObject)).inverse.cyan);
+    //  using the index.handlebars file for displaying the object
     res.render("index", handlebrsObject);
   });
 });
 
+// Router to the burger.js file with the burger name
 router.post("/burgers/create", function(req, res) {
-  console.log("res", res);
-  console.log("req.body", req.body);
-  burger.create(req.body.burger_name, function(result) {
-//    console.log("result", result);
-    console.log(('controller response  = ' + JSON.stringify(result)).inverse.cyan);
+  burger.insertOne(req.body.burger_name, function(result) {
     res.redirect("/");
   });
 });
 
+// Router for updating one of the "burgers" from "not devoured" to "devoured"
 router.put("/:id", function(req, res) {
   var condition = "id = " + req.params.id;
-
-//  console.log("condition", condition);
-
-  console.log(('controller condition  = ' + JSON.stringify(condition)).inverse.cyan);
-  
-  burger.update({devoured: req.body.devoured}, condition, function() {
-      console.log(('\ncontroller devoured  = ' + JSON.stringify(req.body.devoured)).inverse.cyan);
+  burger.updateOne({devoured: req.body.devoured}, condition, function() {
     res.redirect("/");
   });
 });
 
+// Router for deletion 
 router.delete("/:id", function(req, res) {
   var condition = "id = " + req.params.id;
-
-  console.log("condition", condition);
-  console.log(('\ncontroller devoured  = ' + JSON.stringify(req.params.id)).inverse.blue);
   burger.delete(condition, function() {
     res.redirect("/");
   });

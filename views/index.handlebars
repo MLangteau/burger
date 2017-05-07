@@ -7,7 +7,7 @@
                 {{!--Unordered list for burgers not devoured yet --}}
                 <ul>
                     <li>
-                        {{this.id}} {{this.burger_name}}
+                        {{this.id}}. {{this.burger_name}}
                         <form action="/{{this.id}}?_method=PUT" method="POST">
                             <input type="hidden" name="devoured" value="false">
                             <button class="devour" type="submit">Devour it!</button>
@@ -35,7 +35,7 @@
             {{#if this.devoured}}
                 <ul>
                     <li>
-                        {{this.id}} {{this.burger_name}} 
+                        {{this.id}}. {{this.burger_name}} 
                         {{!-- This is for the Handlebars form for devoured burgers to be --}}
                         {{!-- deleted from the MySQL database.  The form is found in the --}}
                         {{!-- views/partials/burgers folder.  You could use a similar structure --}}
